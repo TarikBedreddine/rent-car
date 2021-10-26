@@ -2,17 +2,19 @@ package com.rentcar.rent.model;
 
 public class Car {
 	private int id;
+	private String immat;
 	private String name;
 	private String color;
 	private double price;
 	
 	public Car() {}
 
-	public Car(int id, String name, String color, double price) {
+	public Car(int id, String name, String color, double price, String immat) {
 		this.id = id;
 		this.name = name;
 		this.color = color;
 		this.price = price;
+		this.immat = immat;
 	}
 	public int getId() {
 		return id;
@@ -39,6 +41,14 @@ public class Car {
 		this.price = price;
 	}
 	
+	public String getImmat() {
+		return immat;
+	}
+
+	public void setImmat(String immat) {
+		this.immat = immat;
+	}
+
 	@Override
 	public String toString() {
 		return "Car [id=" + id + ", name=" + name + ", color=" + color + ", price=" + price + "]";

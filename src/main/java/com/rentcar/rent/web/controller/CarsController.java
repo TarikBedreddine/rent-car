@@ -1,11 +1,18 @@
 package com.rentcar.rent.web.controller;
 
+import java.util.List;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,31 +23,50 @@ import com.rentcar.rent.model.Car;
 @Controller
 public class CarsController {
 
-	public CarDaoImpl carDao;
-	
-	public CarsController() {
-		this.carDao = new CarDaoImpl();
+	public CarDaoImpl carDao = new CarDaoImpl();
+
+	@GetMapping(value = "/")
+	public String homePage() {
+		return "index";
+	}
+
+	@GetMapping(value = "/cars")
+	public String allCars(Model model) {
+		model.addAttribute("cars", carDao.findAll());
+		model.addAttribute(new Car());
+		return "cars";
+	}
+
+	@PostMapping(path = "/deleteCar", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+	public String deleteCar(@RequestBody MultiValueMap<String,String> paramMap) {
+		String id = paramMap.get("list-vehicules").get(0);
+		carDao.Cardelete(Integer.valueOf(id));
+		return "redirect:/cars";
+	}
+
+	@GetMapping(value = "/cars/{id}")
+	public String findCar(@PathVariable int id, Model model) {
+		
+		model.addAttribute("car", carDao.CarfindById(id));
+		return "carDetails";
+	}
+
+	@PostMapping(path = "/cars")
+	public String saveCar(@ModelAttribute Car car, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			System.out.println(bindingResult.getAllErrors());
+		}
+		List<Car> listCars = carDao.findAll();
+		listCars.size();
+		car.setId(listCars.size() + 1);
+		
+		carDao.Carsave(car);
+		return "redirect:/cars";
 	}
 	
-    @GetMapping(value="/cars")
-    public String allCars(Model model) {
-    	model.addAttribute("cars", carDao.findAll());
-    	return "home";
-    }
-    
-    @GetMapping(value="/cars/{id}")
-    public Car findCar(@PathVariable int id) {
-    	return carDao.CarfindById(id);
-    }
-    
-    @PostMapping(path = "cars", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void saveCar(@RequestBody Car car) {
-    	carDao.Carsave(car);
-    }
-    
-    @RequestMapping("/")
-    public String homePage(@RequestParam("name") String name, Model model) {
-    	model.addAttribute("name", name);
-    	return "home";
-    }
+	@PutMapping(path = "/updateCar")
+	public String updateCar(@ModelAttribute Car car, Model model) {
+		carDao.updateCar(car.getId(), car);
+		return "redirect:/cars";
+	}
 }

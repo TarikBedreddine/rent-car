@@ -1,0 +1,27 @@
+<!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta>
+<title>index</title>
+</head>
+
+<body>
+	<h3>Modifier un véhicule</h3>
+
+	<form action="#" th:action="@{/updateCar}" th:object="${car}" th:method="put">
+		<label for="immat">Immatriculation</label>
+		<input type="text" id="immat" th:field="*{immat}" th:value="${car.name}"></input>
+	
+		<label for="name">Nom du véhicule</label>
+		<input type="text" id="name" th:field="*{name}" ></input>
+		
+		<label for="color">Couleur</label>
+		<input id="color" th:field="*{color}"></input>
+		
+		<label for="price">Price</label>
+		<input id="price" th:field="*{price}"></input>
+		
+		<button type="submit">Valider</button>
+	</form>
+</body>
+</html>

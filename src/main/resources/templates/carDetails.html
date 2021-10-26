@@ -6,12 +6,9 @@
 	</head>
 	
 	<body>
-		<h1>WELCOME to Cars Rent !</h1>
-		<h2 th:text="${cars}"></h2>
-		
-		<form action="/cars">
-			<button type="submit" >Lister toutes les voitures disponibles à la location</button>
-		</form>
-		
+		<h2 th:text="${car.name}"></h2>
+		<h3 th:text="${car.immat}"></h3>
+		<h3 th:text="${car.color}"></h3>
+		<h3 th:text="${car.price}"></h3>
 	</body>
 </html>
