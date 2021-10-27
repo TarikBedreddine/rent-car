@@ -16,6 +16,14 @@ public class Car {
 		this.price = price;
 		this.immat = immat;
 	}
+	
+	public Car(String name, String color, double price, String immat) {
+		this.name = name;
+		this.color = color;
+		this.price = price;
+		this.immat = immat;
+	}
+	
 	public int getId() {
 		return id;
 	}

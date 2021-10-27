@@ -3,10 +3,10 @@ package com.rentcar.rent.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.elasticsearch.discovery.zen.MasterFaultDetection.ThisIsNotTheMasterYouAreLookingForException;
 import org.springframework.stereotype.Repository;
 
 import com.rentcar.rent.model.Car;
+import com.rentcar.rent.model.CarList;
 
 
 
@@ -24,8 +24,10 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-	public List<Car> findAll() {
-		return cars;
+	public CarList findAll() {
+		CarList carList = new CarList();
+		carList.setCarList(cars);
+		return carList;
 	}
 
 	@Override
@@ -39,17 +41,21 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-	public void Carsave(Car car) {
+	public Car Carsave(Car car) {
+		car.setId(cars.size() + 1);
 		cars.add(car);
+		return car;
 	}
 	
 	@Override
-	public void Cardelete(int carId) {
+	public boolean Cardelete(int carId) {
 		Car car = CarfindById(carId);
 		if (car != null) {
 			int carIndex = cars.indexOf(car);
 			cars.remove(carIndex);
+			return true;
 		}
+		return false;
 	}
 	
 	@Override
