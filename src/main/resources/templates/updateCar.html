@@ -8,7 +8,7 @@
 <body>
 	<h3>Modifier un véhicule</h3>
 
-	<form action="#" th:action="@{/updateCar}" th:object="${car}" th:method="put">
+	<form action="#" th:action="@{/updateCar}" th:object="${car}" method="post">
 		<label for="immat">Immatriculation</label>
 		<input type="text" id="immat" th:field="*{immat}" th:value="${car.name}"></input>
 	
@@ -20,6 +20,8 @@
 		
 		<label for="price">Price</label>
 		<input id="price" th:field="*{price}"></input>
+		
+		<input type="hidden" th:field="*{id}"></input>
 		
 		<button type="submit">Valider</button>
 	</form>

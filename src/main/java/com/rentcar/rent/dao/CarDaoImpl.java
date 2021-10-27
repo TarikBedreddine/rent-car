@@ -56,8 +56,10 @@ public class CarDaoImpl implements CarDao {
 	public void updateCar(int carId, Car updatedCar) {
 		Car car = CarfindById(carId);
 		if (car != null) {
-			int carIndex = cars.indexOf(car);
-			cars.set(carIndex, car);	
+			car.setImmat(updatedCar.getImmat());
+			car.setName(updatedCar.getName());
+			car.setColor(updatedCar.getColor());
+			car.setPrice(updatedCar.getPrice());
 		}
 	}
 	
