@@ -35,18 +35,18 @@
 
 			<h3>Ajouter un nouveau véhicule</h3>
 			
-			<form action="#" th:action="@{/cars}" th:object="${car}" th:method="post">
+			<form action="#" th:action="@{/cars}" th:method="post">
 				<label for="immat">Immatriculation</label>
-				<input type="text" id="immat" th:field="*{immat}" ></input>
+				<input type="text" id="immat" name="immat" ></input>
 			
 				<label for="name">Nom du véhicule</label>
-				<input type="text" id="name" th:field="*{name}" ></input>
+				<input type="text" id="name" name="name" ></input>
 				
 				<label for="color">Couleur</label>
-				<input id="color" th:field="*{color}"></input>
+				<input id="color" name="color"></input>
 				
 				<label for="price">Price</label>
-				<input id="price" th:field="*{price}"></input>
+				<input id="price" name="price"></input>
 				
 				<button type="submit">Valider</button>
 			</form>

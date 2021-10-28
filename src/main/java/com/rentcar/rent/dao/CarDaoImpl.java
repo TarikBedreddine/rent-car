@@ -24,10 +24,8 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-	public CarList findAll() {
-		CarList carList = new CarList();
-		carList.setCarList(cars);
-		return carList;
+	public List<Car> findAll() {
+		return cars;
 	}
 
 	@Override
