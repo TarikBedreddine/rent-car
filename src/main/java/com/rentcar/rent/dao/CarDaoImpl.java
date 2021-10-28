@@ -48,14 +48,12 @@ public class CarDaoImpl implements CarDao {
 	}
 	
 	@Override
-	public boolean Cardelete(int carId) {
+	public void Cardelete(int carId) {
 		Car car = CarfindById(carId);
 		if (car != null) {
 			int carIndex = cars.indexOf(car);
 			cars.remove(carIndex);
-			return true;
 		}
-		return false;
 	}
 	
 	@Override

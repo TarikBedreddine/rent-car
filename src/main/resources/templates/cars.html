@@ -35,7 +35,7 @@
 
 			<h3>Ajouter un nouveau véhicule</h3>
 			
-			<form action="#" th:action="@{/cars}" th:object="${car}" th:method="post">
+			<form action="#" th:action="@{/cars}" th:object="${cars}" th:method="post">
 				<label for="immat">Immatriculation</label>
 				<input type="text" id="immat" th:field="*{immat}" ></input>
 			

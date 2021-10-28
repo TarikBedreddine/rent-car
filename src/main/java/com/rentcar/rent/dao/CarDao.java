@@ -9,6 +9,6 @@ public interface CarDao {
 	public CarList findAll();
 	public Car CarfindById(int id);
 	public Car Carsave(Car car);
-	public boolean Cardelete(int carId);
+	public void Cardelete(int carId);
 	public void updateCar(int carId, Car updatedCar);
 }
