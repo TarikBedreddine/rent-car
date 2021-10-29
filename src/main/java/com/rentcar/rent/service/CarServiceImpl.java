@@ -32,13 +32,12 @@ public class CarServiceImpl implements CarService{
 
 	@Override
 	public void deleteOneCar(int carId) {
-		// TODO Auto-generated method stub
-		
+		carDao.delete(this.getOneCar(carId));
 	}
 
 	@Override
 	public void updateOneCar(int carId, Car updatedCar) {
-		// TODO Auto-generated method stub
-		
+		updatedCar.setId(carId);
+		carDao.saveAndFlush(updatedCar);
 	}
 }

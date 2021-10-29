@@ -20,7 +20,7 @@
 			  	<td th:utext="${car.immat}"></td>
 			  	<td th:utext="${car.name}"></td>
 			  	<td th:utext="${car.color}"></td>
-			  	<td th:utext="${car.price}"></td>
+			  	<td th:utext="${car.price} + ' €' "></td>
 			  	<td>
 			  		<button>
 			  		<a th:href="'/cars/' + ${car.id}">
