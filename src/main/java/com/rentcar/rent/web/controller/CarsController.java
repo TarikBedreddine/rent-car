@@ -4,33 +4,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rentcar.rent.dao.CarDaoImpl;
 import com.rentcar.rent.model.Car;
-import com.rentcar.rent.model.CarList;
+import com.rentcar.rent.service.CarService;
 
 @RestController
 public class CarsController {
 
-	@Autowired
-	public CarDaoImpl carDao;
+	@Autowired 
+	private CarService carService;
 
 	@GetMapping(value = "/cars")
-	public CarList allCars(Model model) {
-		return carDao.findAll();
+	public Iterable<Car> allCars(Model model) {
+		return carService.getAllCars();
 	}
 
 	@GetMapping(value = "/cars/{id}")
 	public Car findCar(@PathVariable int id) {
-		return carDao.CarfindById(id);
+		Car oneCar = carService.getOneCar(id);
+		return carService.getOneCar(id);
 	}
 
 	@PostMapping(path = "/cars")
@@ -39,16 +37,16 @@ public class CarsController {
 		if (bindingResult.hasErrors()) {
 			System.out.println(bindingResult.getAllErrors());
 		}
-		return carDao.Carsave(car);
+		return carService.saveCar(car);
 	}
-	
-	@DeleteMapping(path = "/cars/{id}")
-	public void deleteCar(@PathVariable int id) {
-		carDao.Cardelete(id);
-	}
-	
-	@PutMapping(path = "/updateCar/{id}")
-	public void updateCar(@PathVariable int id, @RequestBody Car car) {
-		carDao.updateCar(id, car);
-	}
+//	
+//	@DeleteMapping(path = "/cars/{id}")
+//	public void deleteCar(@PathVariable int id) {
+//		carDao.Cardelete(id);
+//	}
+//	
+//	@PutMapping(path = "/updateCar/{id}")
+//	public void updateCar(@PathVariable int id, @RequestBody Car car) {
+//		carDao.updateCar(id, car);
+//	}
 }

@@ -1,14 +1,11 @@
 package com.rentcar.rent.dao;
 
 
-import com.rentcar.rent.model.Car;
-import com.rentcar.rent.model.CarList;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CarDao {
+import com.rentcar.rent.model.Car;
+
+public interface CarDao extends JpaRepository<Car, Integer> {
 	
-	public CarList findAll();
-	public Car CarfindById(int id);
-	public Car Carsave(Car car);
-	public void Cardelete(int carId);
-	public void updateCar(int carId, Car updatedCar);
+	Car findCarById(int id);
 }
